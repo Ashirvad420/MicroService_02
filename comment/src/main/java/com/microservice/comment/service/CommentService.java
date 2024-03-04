@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,7 +24,7 @@ public class CommentService {
     public  Comment saveComment(Comment comment)
     {
 //       Post post= restTemplate.getRestTemplate().getForObject("http://localhost:8081/api/posts"+comment.getPostId(), Post.class);
-        RestTemplate post = restTemplate.getRestTemplate("http://localhost:8081/api/posts/" + comment.getPostId(), Post.class);
+         RestTemplate post = restTemplate.getRestTemplate("http://localhost:8081/api/posts/" + comment.getPostId(), Post.class);
 
 
         if(post!=null)   // if post object is null it means post is does not exist.... if post Object is not null post is exist
@@ -37,6 +38,13 @@ public class CommentService {
        {
          return  null;
        }
+    }
+
+    // List of All Comments using postId
+    public List<Comment> getAllCommentsById(String postId)
+    {
+        List<Comment>  comments = commentRepository.findByPostId(postId);
+        return comments;
     }
 }
 

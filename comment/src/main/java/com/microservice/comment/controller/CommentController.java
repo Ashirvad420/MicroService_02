@@ -6,10 +6,9 @@ import com.microservice.comment.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -28,5 +27,13 @@ public class CommentController {
     {
        Comment c = commentService.saveComment(comment);
        return new ResponseEntity<>(c, HttpStatus.OK);
+    }
+
+    // How to get Comments id using PostId
+    @GetMapping("{postId}")
+    public List<Comment> getAllCommentsById(@PathVariable String postId)
+    {
+        List<Comment> comments = commentService.getAllCommentsById(postId);
+        return comments;
     }
 }

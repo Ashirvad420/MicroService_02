@@ -16,6 +16,7 @@ public class RestTemplateConfig { //Rest Class Template
     }
 
     public RestTemplate getRestTemplate(String s, Class<Post> postClass) {
+
         return new RestTemplate();
     }
 }
